@@ -11,3 +11,5 @@ Okay so I was working on the CSS and designing it, basically made it like a purp
 Also before this, while testing and making it I forgot to attatch the stylesheet. I just needed to update it here
 
 Right now  I am working on the BNUUYY talking. I spelled grey as gray because of Conan Gray who's one of my fav singers. 
+
+SO here is the plan, I am going to make an option to make upgrades in the game in the cauldron, and add more ingridients and items. 
