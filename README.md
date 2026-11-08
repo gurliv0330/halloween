@@ -13,3 +13,5 @@ Also before this, while testing and making it I forgot to attatch the stylesheet
 Right now  I am working on the BNUUYY talking. I spelled grey as gray because of Conan Gray who's one of my fav singers. 
 
 SO here is the plan, I am going to make an option to make upgrades in the game in the cauldron, and add more ingridients and items. 
+
+So i made the colors darker to match the halloween vibe, mostly a dark purple and yes that cute lil pink stays. But also I might orange.
