@@ -20,3 +20,5 @@ I made the whole look cleaner and just like polished.
 <img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/9a113f12-1bd0-4610-9990-81df5fd6b06b" />
 
 I just need to make the upgrades work now and then I'm done. I might even reach 11 hours. 
+
+there were a few bugs that I had to fix becuase all of the ingredients weren't showing up, but now they are so i'm done. 
