@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Potion Maker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    </head>
+
+    <body>
+
+        <canvas id="shop-canvas"></canvas>
+            <header>
+                <h1>
+                    MIDNIGHT POTION MIXERRR
+                </h1>
+                <div class="header-right-control">
+                <button id="open-shop-btn" onclick="openShopModal()">UPGRADE SHOPPPP</button>
+                <div id="moon-coins"> 
+                    <span id="coin-count">
+                        0
+                    </span>
+
+                </div>
+                </div>
+            </header>
+            
+
+            <main>
+                <div id="shop-view">
+
+                    <section class="shop-col left-col">
+                    
+                    <div id="order-bubble" onclick="toggleRecipeHint()" title="CLICKKK TO VIEW THE RECIPE HINT!!!">
+
+                        <div id="order-header">
+                            <h3>
+                                BNUUYYY ASKSSSS..
+                            </h3>
+                            <p id="order-text">
+                                Pardon me.. I am BNUUYYYY and I need a glowing potion to brighten my moonlit wings. My pale fur has unfortunately lost its shimmer
+                            </p>
+
+                            <div id="recipe-hint" class="hint-hidden">
+                                <strong>
+                                    Recipe Hint:
+                                </strong>
+                                <span id="hint-text">???</span>
+
+                            </div>
+                        </div>
+
+                        <div class="character-container" onclick="toggleRecipeHint()" style="cursor: pointer;">
+                            <!--vampire bunny-->
+                        <div class="character-container">
+                            <svg class="customer-sprite" viewBox="0 0 100 100">
+                                <!--Left ear-->
+                                <ellipse cx="34" cy="24" rx="9" ry="22" fill="#e9d5ff" stroke="#523b70" stroke-width="3" transform="rotate(-10 34 24)" />
+                                <ellipse cx="34" cy="26" rx="5" ry="16" fill="#fbcfe8" transform="rotate(-10 34 26)" />
+
+                                <!--right ear-->
+                                <ellipse cx="66" cy="24" rx="9" ry="22" fill="e9d5ff" stroke="#523b70" stroke-width="3" transform="rotate(10 66 24)" />
+                                <ellipse cx="66" cy="26" rx="5" ry="16" fill="#fbcfe8" transform="rotate(10 66 26)" />
+
+                                <!-- CAPEEEE-->
+                                <path d="M 22,65 Q 50,75 78,65 L 85,95 Q 50,105 15,95 Z" fill="#7a1c1c" stroke="#523b70" stroke-width="3" stroke-linejoin="round"/>
+                                <circle cx="50" cy="68" r="4" fill="#fde68a" />
+
+                                <!--head-->
+                                <circle cx="50" cy="62" r="32" fill="#e9d5ff" stroke="#523b70" stroke-width="3"/>
+
+                                <!--body-->
+                                <circle cx="50" cy="62" r="32" fill="#e9d5ff" stroke="#523b70" stroke-width="3"/>
+                    
+
+                                <!-- Tummy -->
+                                <ellipse cx="50" cy="72" rx="18" ry="14" fill="#ffffff" opacity="0.6"/>
+
+                                <!--eyes-->
+                                <circle cx="38" cy="56" r="4.5" fill="#2d221c"/>
+                                <circle cx="36.5" cy="54.5" r="1.5" fill="#ffffff"/>
+                    
+                                <circle cx="62" cy="56" r="4.5" fill="#2d221c"/>
+                                <circle cx="60.5" cy="54.5" r="1.5" fill="#ffffff"/>
+
+
+                                <!-- Blush-->
+                                <circle cx="33" cy="64" r="4" fill="#fbcfe8"/>
+                                <circle cx="67" cy="64" r="4" fill="#fbcfe8"/>
+
+                                <!-- Mouth & Fangs -->
+                                <path d="M 46 63 Q 50 67 54 63" fill="none" stroke="#523b70" stroke-width="2.5" stroke-linecap="round"/>
+                                <polygon points="46,64 48,68 49,64" fill="#ffffff"/>
+                                <polygon points="51,64 52,68 54,64" fill="#ffffff"/>
+                            </svg>
+
+
+                            <div class="character-tag">BNUUYYY</div>
+
+                        </section>
+                        <!--middle column-->
+                        <section class="shop-col mid-col">
+
+                        <div id="cauldron-area">
+                            <div id="potion-result-text">
+
+                            </div>
+
+                            <div style="position: relative">
+                                <!-- edit-->
+                                <svg class="cauldron-sprite" id="cauldron-svg" viewBox="0 0 100 100">
+                                    <defs>
+                                        <radialGradient id="liquid-glow" cx="50%" cy="50%" r="50%">
+                                            <stop offset="0%" style="stop-color:rgb(255,255,255); stop-opacity:0.6 "/>
+                                            <stop offset="100%" style="stop-color:rgb(255,255,255); stop-opacity:0" />
+
+                                        </radialGradient>
+                                    </defs>
+
+                                    <!--legs-->
+                                    <rect x="25" y="75" width="8" height="15" rx="4" fill="#3b2b20" />
+                                    <rect x="67" y="75" width="8" height="15" rx="4" fill="#3b2b20" />
+
+                                    <!-- Pot Body & Rim -->
+                            <ellipse id="cauldron-body" cx="50" cy="55" rx="35" ry="25" fill="#2d221c" stroke="#4a3825" stroke-width="3" />
+                            <ellipse id="cauldron-rim" cx="50" cy="30" rx="32" ry="10" fill="#2d221c" stroke="#4a3825" stroke-width="3" />
+
+                            <!-- Liquid -->
+                            <ellipse id="cauldron-liquid" cx="50" cy="30" rx="27" ry="7" fill="#5e4e6d"/>
+                            <ellipse cx="50" cy="30" rx="20" ry="4" fill="url(#liquid-glow)" />
+                                    <!--added upgrade bubble elements -->
+                            <g id="cauldron-bubbles" class="bubbles-hidden">
+                                <circle cx="42" cy="28" r="2" fill="#ffffff" opacity="0.8">
+                                    <animate attributeName="cy" values="32;22;32" dur="2s" repeatCount="indefinite" />
+
+                                </circle>
+
+                                <circle cx="55" cy="30" r="1.5" fill="#ffffff" opacity="0.8">
+                                   <animate attributeName="cy" values="32;22;32" dur="1.5s" repeatCount="indefinite"/>
+                                    
+                                </circle>
+
+                            </g>
+                                    
+
+                                </svg>
+                                <div id="effect-container"></div>
+                            </div>
+                            <div id="selected-ingredients-list">
+                                <span>Current Ingredients:</span>
+                                <div id="ingredient-tags">None</div>
+                            </div>
+                        </div>
+                        </section>
+
+                        <section class="shop-col right-col" id="shelf-view">
+                            <h2>INGRIDIENT SHELFFFF</h2>
+
+                            <div class="ingredient-grid">
+                                <button class="ingredient-btn" id="skullbark" onclick="addIngredient('skullbark')">
+                                   <svg class="ingredient-icon" viewBox="0 0 100 100">
+                                        <circle cx="50" cy="45" r="28" fill="#e8d7be" stroke="#523b70" stroke-width="4"/>
+                                        <rect x="40" y="62" width="20" height="14" rx="3" fill="#e8d7be" stroke="#523b70" stroke-width="3"/>
+                                        <circle cx="42" cy="45" r="5" fill="#523b70"/>
+                                        <circle cx="58" cy="45" r="5" fill="#523b70"/>
+                                   </svg> 
+                                   <span class="ing-label">SkullBark</span>
+                                </button>
+
+                                <!--moonflower-->
+                                <button class="ingredient-btn" id="moonflower" onclick="addIngredient('moonflower')">
+                                    <svg class="ingredient-icon" viewBox="0 0 100 100">
+                                        <circle cx="50" cy="50" r="30" fill="#ffffff" stroke="#523b70" stroke-width="4"/>
+                                        <circle cx="50" cy="50" r="12" fill="#bbf7d0" stroke="#523b70" stroke-width="3"/>
+                                    </svg>
+                                    <span class="ing-label">Moonflower</span>
+                                </button>
+
+                            <!--Gigglesap-->
+                            <button class="ingredient-btn" id="gigglesap" onclick="addIngredient('gigglesap')">
+                               <svg class="ingredient-icon" viewBox="0 0 100 100">
+                                  <path d="M 50,18 Q 72,45 72,65 A 22,22 0 0,1 28,65 Q 28,45 50,18 Z" fill="#fbcfe8" stroke="#523b70" stroke-width="4"/>
+
+                               </svg> 
+                               <span class="ing-label">Gigglesap</span>
+                            </button>
+
+                            <!--Stardust-->
+                            <button class="ingredient-btn" id="stardust" onclick="addIngredient('stardust')">
+                                <svg class="ingredient-icon" viewBox="0 0 100 100">
+                                    <polygon points="50,15 61,38 85,38 66,54 73,78 50,62 27,78 34,54 15,38 39,38" fill="#fde68a" stroke="#523b70" stroke-width="4"/>
+
+                                </svg>
+                                <span class="ing-label">Stardust</span>
+                            </button>
+
+                            <!--Shadow Essence-->
+                            <button class="ingredient-btn" id="shadowessence" onclick="addIngredient('shadowessence')">
+                                <svg class="ingredient-icon" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="28" fill="#523b70" stroke="#c084fc" stroke-width="4"/>
+
+                                </svg>
+
+                                <span class="ing-label">Shadow Essence</span>
+
+                            </button>
+
+                            </div>
+
+                    <div class="shelf-actions">
+                        <button id="clear-btn" onclick="clearCauldron()">Clear cauldron</button>
+                        <button id="serve-btn" onclick="servePotion()"> SERVEE POTION!!!!</button>
+
+                    </div>
+                
+                </section> 
+            </div>
+            </main>
+
+        <div id="custom-dialog-overlay" class="custom-dialog-overlay" onclick="closeDialogOnOuter(event)">
+            <div class="custom-dialog">
+                <h3 id="dialog-title">
+                    MAGICAL SUCCESS!!!!!
+                </h3>
+                <p id="dialog-body">
+                    BNUUYYY LOVEDDD THE POTIONN!!!!
+                </p>
+
+                <button class="dialog-close-btn" onclick="closeDialog()">CONTINUEEE</button>
+
+            </div>
+        </div>
+
+        <div id="upgrade-shop-overlay" class="custom-dialog-overlay" onclick="closeUpgradeShopOnOuter(event)">
+            <div class="custom-dialog upgrade-modal">
+                <div class="shop-modal-header">
+                    <h3>
+                        CAULDRON UPGRADE SHOPPP!!!!
+                    </h3>
+                <p style="margin-bottom: 12px; font-size: 0.85rem;">SPEND YOUR MOON COINS TO UPGRADE YOUR MATERIAL!!!</p>
+                 
+
+                </div>
+
+                <div class="shop-items-list">
+                    <!--item 1 gold cauldron-->
+                    <div class="shop-item">
+                        <div class="item-info">
+                            <strong> Golden Cauldron</strong>
+                            <span> 2X COIN EARNINGS ON ALL SUCCESSFUL POTIONS!!</span>
+                        </div>
+                        <button id="buy-golden-cauldron" class="buy-btn" onclick="buyUpgrade('goldenCauldron')">50 🪙</button>
+
+                    </div>
+
+                    <div class="shop-item">
+                       <div class="item-info">
+                        <strong> BUBBLEEEE WANDDDDDDD</strong>
+                        <span> THIS ABSOLUTE PIECE OF MAGIC ADDS BUBBLE EFFECTS TO THE BREWINGG!!!</span>
+
+                       </div> 
+                       <button id="buy-bubble-wand" class="buy-btn" onclick="buyUpgrade('bubbleWand')"> 30 🪙</button>
+
+                    </div>
+                </div>
+
+                <button class="dialog-close-btn" style="margin-top: 16px;" onclick="closeShopModal()">CLOSEEE SHOPPPP</button>
+                
+
+            </div>
+        </div>
+        
+        <script src="script.js"></script>
+    </body>
+
+
+
+</html>

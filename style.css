@@ -1,0 +1,516 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+:root {
+    --bg-cozy: #261231;
+    --paper: #d8581d;
+    --ink: #0c0c0c;
+    --mint: #53be79;
+    --pink: #e051a2;
+    --gold: #b9b724;
+    --lavender: #875cb4;
+    --border-soft: #315583;
+}
+
+body {
+   background-color: var(--bg-cozy);
+   color: var(--ink);
+   font-family: 'Nunito', sans-serif;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+   position: relative;
+}
+
+#shop-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: var(--paper);
+    border-bottom: 2px solid var(--border-left);
+    box-shadow: 0 4px 20px rgba(82, 59, 112, 0.05);
+}
+
+h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.7rem;
+    color: var(--ink);
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px 0 var(--lavender);
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#open-shop-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    border: 2px solid var(--ink);
+    background: var(--mint);
+    color: var(--ink);
+    padding: 6px 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#open-shop-btn:hover {
+    transform: translateY(-2px);
+    background-color: #eb57a1;
+}
+
+#moon-coins {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: var(--ink);
+    background: var(--gold);
+    padding: 6px 18px;
+    border-radius: 50px;
+    border: 2px solid var(--ink);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+main {
+    position: relative;
+    z-index: 5;
+    flex: 1;
+    display: grid;
+    grid-template-rows: 1.8fr 1fr;
+    padding: 20px;
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#shop-view {
+    background: var(--paper);
+    border-radius: 28px;
+    border: 3px solid var(--ink);
+    box-shadow: 0 10px 40px rgba(82, 59, 112, 0.15);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 24px;
+    width: 100%;
+}
+
+.shop-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    padding: 18px;
+    border: 2px solid rgba(60, 34, 95, 0.15);
+}
+
+.left-col {
+    justify-content:  flex-start;
+    gap: 20px;
+}
+
+#order-bubble {
+    background: #fffdf5;
+    border: 3px solid #6e553c;
+    border-radius: 20px;
+    padding: 16px;
+    width: 100%;
+    box-shadow: 4px 4px 0 rgba(110, 85, 60, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+order-bubble:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 0 rgba(110, 85, 60, 0.2);
+}
+
+#order-bubble h3 {
+    font-family: 'Fredoka One', cursive;
+    color: #574737;
+    font-size: 1rem;
+    margin-bottom: 6px;
+}
+
+#order-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #2b1f13;
+    font-weight: 600;
+}
+
+#recipe-hint {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 2px dashed #c9a47a;
+    font-size: 0.85rem;
+    color: #291346;
+    transition: all 0.3s ease;
+}
+
+.hint-hidden {
+    display: none;
+}
+
+.character-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-top: auto;
+}
+
+.customer-sprite {
+  width: 150px;
+  height: 160px;
+  transition: transform 0.4s ease;
+  filter: drop-shadow(0 10px 15px rgba(82, 59, 112, 0.12));
+  animation: gentle-float 3.5s ease-in-out infinite; 
+}
+
+.character-tag {
+    margin-top: 6px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    background: var(--lavender);
+    color: var(--ink);
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 2px solid var(--ink);
+}
+
+.mid-col {
+    justify-content: center;
+    gap: 20px;
+}
+
+#cauldron-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#potion-result-text {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: #df559a;
+    min-height: 2rem;
+    text-align: center;
+}
+
+.cauldron-sprite {
+    width: 160px;
+    height: 160px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+    transition: transform 0.3s ease;
+}
+
+.cauldron-sprite.active {
+    animation: cauldron-shake 0.4s ease-in-out;
+}
+
+#cauldron-liquid {
+    transition: fill 0.6s ease;
+}
+
+.bubbles-hidden {
+    display: none;
+}
+
+.golden-glow {
+    filter: drop-shadow(0 0 12px rgba(231, 206, 107, 0.8)) !important;
+}
+
+#selected-ingredients-list {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+#ingredient-tags {
+    margin-top: 6px;
+    font-family: 'Fredoka One', cursive;
+    color: var(--ink);
+    font-size: 0.95rem;
+    min-height: 1.4rem;
+}
+
+.right-col h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 12px;
+}
+
+.ingredient-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+
+.ingredient-btn {
+   background: #164672;
+   border: 3px solid var(--border-soft);
+   border-radius: 16px;
+   padding: 10px;
+   cursor: pointer;
+   transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 6px;
+   box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+}
+
+.ingredient-btn:hover {
+    transform: translateY(-2px);
+    background: #6a9bc4;
+}
+
+.ingredient-btn.selected {
+    border-color: var(--ink);
+    background: var(--gold);
+    transform: scale(0.95);
+}
+
+.ingredient-icon {
+    width: 36px;
+    height: 36px;
+}
+
+.ing-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--ink);
+}
+
+.shelf-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: 14px;
+}
+
+#clear-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.85rem;
+    color: var(--ink);
+    background: transparent;
+    border: 2px dashed var(--ink);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#clear-btn:hover {
+    background: rgba(255, 0, 0, 0.6);
+}
+
+#serve-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: #fff;
+    background-color: var(--ink);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    cursor: not-allowed;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(82, 59, 112, 0.2);
+}
+
+#serve-btn.ready {
+    cursor: pointer;
+    opacity: 1;
+    background-color: #e7519c;
+}
+
+#serve-btn.ready:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 117, 151, 0.4);
+}
+
+
+
+
+
+.custom-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(60, 34, 95, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+
+
+
+
+.custom-dialog-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.custom-dialog {
+    background: var(--paper);
+    padding: 28px;
+    border-radius: 24px;
+    text-align: center;
+    width: 90%;
+    max-width: 380px;
+    border: 3px solid var(--ink);
+    box-shadow: 0 15px 40px rgba(82, 59, 112, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.custom-dialog-overlay.active .custom-dialog {
+    transform: scale(1);
+}
+
+.shop-modal {
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+
+
+
+
+.shop-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(43, 76, 82, 0.877);
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 2px solid var(--ink);
+    text-align: left;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-info strong {
+    font-size: 0.9rem;
+    color: var(--ink);
+}
+
+.item-info span {
+    font-size: 0.75rem;
+    color: #0c0e30;
+}
+
+.buy-btn {
+    font-family: 'Fredoka One', cursive;
+    background: var(--gold);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+
+
+
+.buy-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+
+
+
+
+.buy-btn:disabled {
+    background: #a11010;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.custom-dialog h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.custom-dialog p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #180e33;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.dialog-close-btn {
+    font-family: 'Fredoka One', cursive;
+    background: #960a0a;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+@keyframes gentle-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes cauldron-shake {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06) translateY(-4px); }
+}
