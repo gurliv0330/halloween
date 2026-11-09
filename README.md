@@ -15,3 +15,8 @@ Right now  I am working on the BNUUYY talking. I spelled grey as gray because of
 SO here is the plan, I am going to make an option to make upgrades in the game in the cauldron, and add more ingridients and items. 
 
 So i made the colors darker to match the halloween vibe, mostly a dark purple and yes that cute lil pink stays. But also I might orange.
+
+I made the whole look cleaner and just like polished. 
+<img width="1365" height="767" alt="image" src="https://github.com/user-attachments/assets/9a113f12-1bd0-4610-9990-81df5fd6b06b" />
+
+I just need to make the upgrades work now and then I'm done. I might even reach 11 hours. 
